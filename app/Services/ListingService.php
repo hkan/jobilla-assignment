@@ -17,19 +17,9 @@ class ListingService
     {
         return Listing::orderBy($sort['column'], $sort['order'])
             ->when($sort['column'] == 'company_name', fn(Builder $query) =>
-                $query->orderBy('companies.name', $sort['order'])
-                    ->leftJoin('companies', 'companies.id', '=', 'listings.company_id')
-            )
-            ->when($search !== null, fn(Builder $searchQuery) =>
-                $searchQuery
-                    ->where('title', 'LIKE', "%{$search}%")
-                    ->orWhere('description', 'LIKE', "%{$search}%")
-                    ->orWhere(fn(Builder $subquery) =>
-                        $subquery->whereHas('company', fn(Builder $relationQuery) =>
-                            $relationQuery->where('name', 'LIKE', "%{$search}%")
-                        )
-                    )
-            )
+                $this->sortByCompanyName($query, $sort['order']))
+            ->when($search !== null, fn(Builder $query) =>
+                $this->filterListings($query, $search))
             ->paginate();
     }
 
@@ -42,5 +32,24 @@ class ListingService
             'column' => $column,
             'order' => $order,
         ];
+    }
+
+    protected function sortByCompanyName(Builder $query, string $order): void
+    {
+        $query
+            ->orderBy('companies.name', $order)
+            ->leftJoin('companies', 'companies.id', '=', 'listings.company_id');
+    }
+
+    protected function filterListings(Builder $searchQuery, string $search): void
+    {
+        $searchQuery
+            ->where('title', 'LIKE', "%{$search}%")
+            ->orWhere('description', 'LIKE', "%{$search}%")
+            ->orWhere(fn(Builder $subquery) =>
+                $subquery->whereHas('company', fn(Builder $relationQuery) =>
+                    $relationQuery->where('name', 'LIKE', "%{$search}%")
+                )
+            );
     }
 }
