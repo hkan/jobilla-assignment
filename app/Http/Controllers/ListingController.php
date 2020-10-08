@@ -12,9 +12,9 @@ class ListingController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        $listings = app(ListingService::class)->getLatestPaginated();
+        $listings = app(ListingService::class)->getLatestPaginated($request->get('search'));
 
         return [
             'listings' => $listings,
