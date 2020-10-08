@@ -14,4 +14,4 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::apiResource('listings', 'ListingController', ['only' => ['index', 'show']]);
+Route::get('listings', 'ListingController@index');
