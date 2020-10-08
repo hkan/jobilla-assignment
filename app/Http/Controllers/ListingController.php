@@ -14,7 +14,14 @@ class ListingController extends Controller
      */
     public function index(Request $request)
     {
-        $listings = app(ListingService::class)->getLatestPaginated($request->get('search'));
+        $listingService = app(ListingService::class);
+
+        $listings = $listingService->getLatestPaginated(
+            $request->get('search'),
+            $listingService->getSortTupleFromQueryString(
+                $request->get('sort', '-published_at')
+            )
+        );
 
         return [
             'listings' => $listings,
