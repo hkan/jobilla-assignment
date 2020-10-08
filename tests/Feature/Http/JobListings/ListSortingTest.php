@@ -15,7 +15,7 @@ class ListSortingTest extends TestCase
     {
         $listings = Listing::factory(5)->create();
 
-        $response = $this->getJson('/listings?sort=title');
+        $response = $this->getJson('/api/listings?sort=title');
 
         $response->assertStatus(200);
 
@@ -32,7 +32,7 @@ class ListSortingTest extends TestCase
     {
         $listings = Listing::factory(5)->create();
 
-        $response = $this->getJson('/listings?sort=-title');
+        $response = $this->getJson('/api/listings?sort=-title');
 
         $response->assertStatus(200);
 
@@ -49,7 +49,7 @@ class ListSortingTest extends TestCase
     {
         $listings = Listing::factory(5)->create();
 
-        $response = $this->getJson('/listings?sort=description');
+        $response = $this->getJson('/api/listings?sort=description');
 
         $response->assertStatus(200);
 
@@ -66,7 +66,7 @@ class ListSortingTest extends TestCase
     {
         $listings = Listing::factory(5)->create();
 
-        $response = $this->getJson('/listings?sort=-description');
+        $response = $this->getJson('/api/listings?sort=-description');
 
         $response->assertStatus(200);
 
@@ -83,7 +83,7 @@ class ListSortingTest extends TestCase
     {
         $listings = Listing::factory(5)->create();
 
-        $response = $this->getJson('/listings?sort=company_name');
+        $response = $this->getJson('/api/listings?sort=company_name');
 
         $response->assertStatus(200);
 
@@ -100,7 +100,7 @@ class ListSortingTest extends TestCase
     {
         $listings = Listing::factory(5)->create();
 
-        $response = $this->getJson('/listings?sort=-company_name');
+        $response = $this->getJson('/api/listings?sort=-company_name');
 
         $response->assertStatus(200);
 
@@ -117,7 +117,7 @@ class ListSortingTest extends TestCase
     {
         $listings = Listing::factory(5)->create();
 
-        $response = $this->getJson('/listings?sort=published_at');
+        $response = $this->getJson('/api/listings?sort=published_at');
 
         $response->assertStatus(200);
 
@@ -134,7 +134,7 @@ class ListSortingTest extends TestCase
     {
         $listings = Listing::factory(5)->create();
 
-        $response = $this->getJson('/listings?sort=-published_at');
+        $response = $this->getJson('/api/listings?sort=-published_at');
 
         $response->assertStatus(200);
 

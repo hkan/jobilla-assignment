@@ -15,7 +15,7 @@ class ListBasicsTest extends TestCase
     {
         $listings = Listing::factory(20)->create();
 
-        $this->getJson('/listings')
+        $this->getJson('/api/listings')
             ->assertStatus(200)
             ->assertJson([
                 'listings' => [
@@ -29,7 +29,7 @@ class ListBasicsTest extends TestCase
     {
         $listings = Listing::factory(20)->create();
 
-        $this->getJson('/listings')
+        $this->getJson('/api/listings')
             ->assertStatus(200)
             ->assertJson([
                 'listings' => [

@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use App\Services\ListingService;
 use Illuminate\Http\Request;
 
-class ListingController extends Controller
+class ListingApiController extends Controller
 {
     /**
      * Display a listing of the resource.

@@ -24,7 +24,7 @@ class ListFiltersTest extends TestCase
             'title' => 'some other title that I am sure will not match',
         ]);
 
-        $this->getJson('/listings?search=long+title+to+make+sure')
+        $this->getJson('/api/listings?search=long+title+to+make+sure')
             ->assertStatus(200)
             ->assertJson([
                 'listings' => [
@@ -49,7 +49,7 @@ class ListFiltersTest extends TestCase
             'description' => 'some other description that I am sure will not match',
         ]);
 
-        $this->getJson('/listings?search=long+description+to+make+sure')
+        $this->getJson('/api/listings?search=long+description+to+make+sure')
             ->assertStatus(200)
             ->assertJson([
                 'listings' => [
@@ -78,7 +78,7 @@ class ListFiltersTest extends TestCase
             ])->id,
         ]);
 
-        $this->getJson('/listings?search=long+company+name+to+make+sure')
+        $this->getJson('/api/listings?search=long+company+name+to+make+sure')
             ->assertStatus(200)
             ->assertJson([
                 'listings' => [

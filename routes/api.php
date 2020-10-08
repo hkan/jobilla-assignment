@@ -14,4 +14,4 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('listings', 'ListingController@index');
+Route::get('listings', 'ListingApiController@index');
