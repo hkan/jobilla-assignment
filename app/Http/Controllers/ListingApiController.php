@@ -23,6 +23,9 @@ class ListingApiController extends Controller
             )
         );
 
+        // Company information will be expected too.
+        $listings->load('company');
+
         return [
             'listings' => $listings,
         ];
