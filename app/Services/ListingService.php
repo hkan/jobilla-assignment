@@ -30,7 +30,7 @@ class ListingService
 
     public function getSortTupleFromQueryString(string $queryString): array
     {
-        $order = substr($queryString, 0, 1) === '-' ? 'desc' : 'asc';
+        $order = Str::startsWith($queryString, '-') ? 'desc' : 'asc';
         $column = substr($queryString, $order === 'desc' ? 1 : 0);
 
         return [
