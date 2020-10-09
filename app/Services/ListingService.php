@@ -15,11 +15,16 @@ class ListingService
         array $sort
     ): LengthAwarePaginator
     {
-        return Listing::orderBy($sort['column'], $sort['order'])
-            ->when($sort['column'] == 'company_name', fn(Builder $query) =>
-                $this->sortByCompanyName($query, $sort['order']))
-            ->when($search !== null, fn(Builder $query) =>
-                $this->filterListings($query, $search))
+        return Listing::query()
+            ->when(
+                $sort['column'] == 'company_name',
+                fn(Builder $query) => $this->sortByCompanyName($query, $sort['order']),
+                fn(Builder $query) => $query->orderBy($sort['column'], $sort['order'])
+            )
+            ->when(
+                $search !== null,
+                fn(Builder $query) => $this->filterListings($query, $search)
+            )
             ->paginate();
     }
 
@@ -38,6 +43,7 @@ class ListingService
     {
         $query
             ->orderBy('companies.name', $order)
+            ->select('listings.*')
             ->leftJoin('companies', 'companies.id', '=', 'listings.company_id');
     }
 
