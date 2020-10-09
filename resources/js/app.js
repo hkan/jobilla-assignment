@@ -1,6 +1,3 @@
-<<<<<<< HEAD
-require('./bootstrap');
-=======
 import Vue from 'vue';
 import infiniteScroll from 'vue-infinite-scroll';
 import './filters/date';
@@ -17,4 +14,3 @@ new Vue({
     return h('job-list');
   },
 });
->>>>>>> 815528d... frontend
